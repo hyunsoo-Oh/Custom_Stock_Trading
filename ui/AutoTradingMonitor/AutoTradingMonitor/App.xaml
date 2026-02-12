@@ -1,0 +1,13 @@
+﻿<Application x:Class="AutoTradingMonitor.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AutoTradingMonitor"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- Top Bar 사이즈 -->
+        <sys:Double x:Key="Layout.TopPanelHeight">100</sys:Double>
+        <!-- Left Panel 사이즈 -->
+        <GridLength x:Key="Layout.LeftPanelWidth">230</GridLength>
+    </Application.Resources>
+</Application>
