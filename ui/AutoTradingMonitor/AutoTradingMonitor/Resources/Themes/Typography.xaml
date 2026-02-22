@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    
+    <!-- 폰트 크기 / 무게 공통값 -->
+    <sys:Double x:Key="FontSize.Title">14</sys:Double>
+    <sys:Double x:Key="FontSize.Body">13</sys:Double>
+    <sys:Double x:Key="FontSize.Caption">11</sys:Double>
+
+    <FontWeight x:Key="FontWeight.SemiBold">SemiBold</FontWeight>
+</ResourceDictionary>

@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="AutoTradingMonitor.Presentation.Views.Pages.StrategiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutoTradingMonitor.Presentation.Views.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <!--
+        목표:
+        - 좌측 전략 목록(List) + 우측 상세(Detail) + 하단 로그(Log)
+        - MVVM 바인딩으로 "등록/실행/정지/파라미터적용/로그필터"를 ViewModel 명령으로 위임
+    -->
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <!-- 상단 툴바 -->
+            <RowDefinition Height="Auto"/>
+            <!-- 본문(좌/우) -->
+            <RowDefinition Height="*"/>
+            <!-- 하단 로그 -->
+            <RowDefinition Height="220"/>
+        </Grid.RowDefinitions>
+
+        <!-- 상단 툴바: 검색/추가/가져오기/내보내기 -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,8">
+            <TextBox Width="220"
+                     VerticalAlignment="Center"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="0,0,8,0"/>
+            <Button Content="+ Add" Command="{Binding AddStrategyCommand}" Margin="0,0,6,0"/>
+            <Button Content="Import" Command="{Binding ImportCommand}" Margin="0,0,6,0"/>
+            <Button Content="Export" Command="{Binding ExportCommand}"/>
+
+            <!-- 우측 상태(엔진 연결 등) -->
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Engine:" Margin="0,0,6,0"/>
+                <Ellipse Width="10" Height="10" Fill="{Binding EngineStatusBrush}" Margin="0,0,6,0"/>
+                <TextBlock Text="{Binding EngineStatusText}"/>
+            </StackPanel>
+        </DockPanel>
+        
+    </Grid>
+</UserControl>

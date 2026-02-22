@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using AutoTradingMonitor.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,7 @@ namespace AutoTradingMonitor
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

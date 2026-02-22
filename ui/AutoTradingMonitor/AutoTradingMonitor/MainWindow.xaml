@@ -4,51 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoTradingMonitor"
+        xmlns:views="clr-namespace:AutoTradingMonitor.Presentation.Views.TopBar"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Background="#FF1E1E1E"
+        Background="{DynamicResource Brush.WindowBackground}"
         Title="Auto Trading Monitor" Height="800" Width="1280">
-    
-    <!-- (옵션) Layout 리소스를 아직 안 만들었다면 임시로라도 선언 -->
-    <Window.Resources>
-        <!-- MVVM 메뉴용 예시(나중에 VM에서 ItemsSource로 대체) -->
-        <x:Array x:Key="NavItems" Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-            <sys:String>Dashboard</sys:String>
-            <sys:String>Universe</sys:String>
-            <sys:String>Theme Rotation</sys:String>
-            <sys:String>Signals</sys:String>
-            <sys:String>Orders</sys:String>
-            <sys:String>Positions</sys:String>
-            <sys:String>Reports</sys:String>
-            <sys:String>Settings</sys:String>
-        </x:Array>
-        <!-- 선택 상태 표시를 위한 아주 최소 템플릿 -->
-        <DataTemplate x:Key="NavItemTemplate">
-            <Grid Margin="6,2" Height="40">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="32"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <!-- 아이콘(문자/이모지/Segoe MDL2 Assets 코드포인트 등) -->
-                <TextBlock Grid.Column="0"
-                       Text="{Binding Icon}"
-                       Foreground="White"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="16"/>
-
-                <!-- 메뉴명 -->
-                <TextBlock Grid.Column="1" Text="{Binding Title}" Foreground="White" VerticalAlignment="Center"  FontSize="13"/>
-            </Grid>
-        </DataTemplate>
-    </Window.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Top Bar -->
-            <RowDefinition Height="*"/> <!-- Main Content Area -->
+            <!-- Top Bar -->
+            <RowDefinition Height="Auto"/>
+            <!-- Main Content Area -->
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="#FF2D2D30" Height="{StaticResource Layout.TopPanelHeight}">
+
+        <!-- Top Bar -->
+        <Border Grid.Row="0" Background="{DynamicResource Brush.TopBar}" Height="{StaticResource Layout.TopPanelHeight}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="{StaticResource Layout.LeftPanelWidth}"/>
@@ -56,43 +27,88 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Left Side of Top Bar -->
-                <Border Grid.Column="0" Background="#FF252526" Padding="12,0">
+                <Border Grid.Column="0" Background="{DynamicResource Brush.TopBarLeft}" Padding="12,0"
+                            BorderBrush="{StaticResource Brush.BorderStrong}"
+                            BorderThickness="0,0,1,1">
                     <DockPanel LastChildFill="True" VerticalAlignment="Center">
                         <!-- Logo Placeholder -->
-                        <Border Width="28" Height="28" CornerRadius="6"
-                                Background="#FF3E3E42"
+                        <Border Width="38" Height="28" CornerRadius="6"
+                                Background="{DynamicResource Brush.PanelAlt}"
                                 DockPanel.Dock="Left"
-                                Margin="0,0,10,0"/>
+                                Margin="0,0,10,0">
+                            <TextBlock Text="V1.0" Foreground="{DynamicResource Brush.TextPrimary}"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Auto Trading Monitor" Foreground="White" FontSize="14" FontWeight="SemiBold"/>
-                            <TextBlock Text="KRX + US | Weekly Rebalance" Foreground="#FFB0B0B0" FontSize="11"/>
+                            <TextBlock Text="Trading Dashboard" 
+                                    Foreground="{DynamicResource Brush.TextPrimary}"
+                                    FontSize="{StaticResource FontSize.Title}"
+                                    FontWeight="{StaticResource FontWeight.SemiBold}"/>
+                            <TextBlock Text="Disconnect | Server"                                       
+                                       Foreground="{DynamicResource Brush.TextSecondary}"
+                                       FontSize="{StaticResource FontSize.Caption}"/>
                         </StackPanel>
                     </DockPanel>
                 </Border>
-                
-                <!-- Right Side of Top Bar -->
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <!-- upper status -->
-                        <RowDefinition Height="Auto"/>
-                        <!-- ribbon -->
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <!-- Left: Ellipse + Disconnect -->
-                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,8,8,8">
-                        <Ellipse Width="10" Height="10" Margin="0,0,8,0" Fill="Red"/>
-                        <TextBlock Text="Disconnect" VerticalAlignment="Center"/>
-                    </StackPanel>
 
-                    <!-- Right: timestamp + latency -->
-                    <TextBlock Grid.Column="2" Text="yyyy-mm-dd hh:mm:ss | Latency 21ms"
-                        VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,0"/>
-                </Grid>
+                <!-- Right Side of Top Bar -->
+                <Border Grid.Column="1" Background="{DynamicResource Brush.TopBarRight}" Margin="4,0,0,0"
+                        BorderBrush="{StaticResource Brush.BorderStrong}"
+                        BorderThickness="1,0,0,1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <!-- upper status -->
+                            <RowDefinition Height="Auto"/>
+                            <!-- ribbon -->
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Uppper Status -->
+                        <Border Grid.Row="0"
+                                Background="{DynamicResource Brush.TopBarRight}"
+                                BorderBrush="{DynamicResource Brush.BorderStrong}"
+                                BorderThickness="0,0,0,1"
+                                Padding="8,4">          
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Left -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Ellipse Width="10" Height="10" Margin="0,0,8,0" Fill="{Binding KRMarketBrush}"/>
+                                    <TextBlock Text="KR : " Foreground="{DynamicResource Brush.TextSecondary}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding KRMarketText}" Foreground="{DynamicResource Brush.TextSecondary}" VerticalAlignment="Center"/>
+
+                                    <TextBlock Text="  |  " Foreground="{DynamicResource Brush.TextSecondary}" VerticalAlignment="Center"/>
+
+                                    <Ellipse Width="10" Height="10" Margin="0,0,8,0" Fill="{Binding USMarketBrush}"/>
+                                    <TextBlock Text="US : " Foreground="{DynamicResource Brush.TextSecondary}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding USMarketText}" Foreground="{DynamicResource Brush.TextSecondary}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <!-- Right -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding LocalTime}" Foreground="{DynamicResource Brush.TextSecondary}"/>
+                                    <TextBlock Text=" | " Foreground="{DynamicResource Brush.TextSecondary}"/>
+                                    <TextBlock Text="{Binding Latency, StringFormat=Latency {0}ms}" Foreground="{DynamicResource Brush.TextSecondary}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Bottom: TopBarWidget goes here -->
+                        <Grid Grid.Row="1" Margin="0,4,0,0">
+                            <views:TopBarWidget DataContext = "{Binding TopBar}">
+                            </views:TopBarWidget>
+                        </Grid>
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
-        
+
         <!-- Body -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,4,0,0" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <!-- Left Panel -->
                 <ColumnDefinition Width="{StaticResource Layout.LeftPanelWidth}"/>
@@ -101,40 +117,53 @@
             </Grid.ColumnDefinitions>
 
             <!-- Side Navigation Panel -->
-            <Border Grid.Column="0" Background="#FF2D2D30">
+            <Border Grid.Column="0" Background="{DynamicResource Brush.SideBar}" Margin="0,0,0,10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    
                     <!-- Header -->
-                    <Border Grid.Row="0" Background="#FF2D2D30" BorderBrush="#FF3E3E42" BorderThickness="0,0,0,1" Padding="12,10">
+                    <Border Grid.Row="0" Background="{DynamicResource Brush.NavHeaderBackground}"
+                                        BorderBrush="{DynamicResource Brush.Border}"
+                                        BorderThickness="0,0,0,1"
+                                        Padding="12,10">
                         <StackPanel>
-                            <TextBlock Text="Navigation" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock Text="Navigation" 
+                                    Foreground="{DynamicResource Brush.TextPrimary}"
+                                    FontWeight="{DynamicResource FontWeight.SemiBold}"/>
                         </StackPanel>
                     </Border>
+                    
                     <!-- Nav List -->
-                    <ListBox Grid.Row="1" Margin="8" Background="Transparent" BorderThickness="0"
-                        ItemTemplate="{StaticResource NavItemTemplate}" ItemsSource="{Binding NavItems}" SelectedItem="{Binding SelectedNavItem}">
+                    <ListBox Grid.Row="1"
+                             Style="{StaticResource ListBox.Sidebar}"
+                             ItemTemplate="{StaticResource NavItemTemplate}"
+                             ItemContainerStyle="{StaticResource ListBoxItem.Sidebar}"
+                             ItemsSource="{Binding NavItems}"
+                             SelectedItem="{Binding SelectedNavItem}">
                     </ListBox>
-                    <Border Grid.Row="2">
-                        <Button HorizontalContentAlignment="Left">
-                            <StackPanel Orientation="Horizontal" Margin="12,10,8,8">
-                                <TextBlock Text="⚙" VerticalAlignment="Center"/>
-                                <TextBlock Text="Settings" VerticalAlignment="Center" />
+                    <Border Grid.Row="2"  Margin="8,0,0,0">
+                        <Button Style="{StaticResource Button.Nav}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⚙" Margin="8,0,8,0"/>
+                                <TextBlock Text="Settings"/>
                             </StackPanel>
                         </Button>
                     </Border>
                 </Grid>
             </Border>
-            
+
             <!-- Main Content Area -->
-            <Grid Grid.Column="1">
-                <Border Background="#FF252526" BorderBrush="#FF3E3E42" BorderThickness="0,0,0,0" Margin="10,10,10,10">
-                    <ContentControl Content="MainHost" />
-                </Border>
-            </Grid>
+            <Border Grid.Column="1"
+                    Background="{DynamicResource Brush.Panel}"
+                    BorderBrush="{DynamicResource Brush.Border}"
+                    BorderThickness="0"
+                    Margin="4,0,0,0">
+                <ContentControl Content="{Binding CurrentPage}" />
+            </Border>
         </Grid>
     </Grid>
 </Window>

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "N10sp/c0pw0=",
+  "dgSpecHash": "jHrLOZXjo1A=",
   "success": true,
-  "projectFilePath": "D:\\Project\\Custom_Stock_Trading\\ui\\AutoTradingMonitor\\AutoTradingMonitor\\AutoTradingMonitor.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\jweli\\Project\\Custom_Stock_Trading\\ui\\AutoTradingMonitor\\AutoTradingMonitor\\AutoTradingMonitor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jweli\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512"
+  ],
   "logs": []
 }

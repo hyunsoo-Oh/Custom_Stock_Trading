@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- CornerRadius -->
+    <CornerRadius x:Key="Radius.Small">4</CornerRadius>
+    <CornerRadius x:Key="Radius.Medium">8</CornerRadius>
+
+    <!-- Border Thickness -->
+    <Thickness x:Key="Thickness.BorderThin">1</Thickness>
+    <Thickness x:Key="Thickness.PaddingButton">10,8</Thickness>
+
+    <!-- Common heights -->
+    <sys:Double x:Key="Size.NavItemHeight">40</sys:Double>
+    
+</ResourceDictionary>

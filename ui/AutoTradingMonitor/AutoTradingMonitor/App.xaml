@@ -5,9 +5,21 @@
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- Top Bar 사이즈 -->
-        <sys:Double x:Key="Layout.TopPanelHeight">100</sys:Double>
-        <!-- Left Panel 사이즈 -->
-        <GridLength x:Key="Layout.LeftPanelWidth">230</GridLength>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Primitives/Spacing/Typography -->
+                <ResourceDictionary Source="Resources/Themes/Primitives.xaml"/>
+                <ResourceDictionary Source="Resources/Themes/Spacing.xaml"/>
+                <ResourceDictionary Source="Resources/Themes/Typography.xaml"/>
+
+                <!-- Theme Colors -->
+                <ResourceDictionary Source="Resources/Themes/Base/Navi.xaml"/>
+
+                <!-- Controls/Layout -->
+                <ResourceDictionary Source="Resources/Themes/Controls/Buttons.xaml"/>
+                <ResourceDictionary Source="Resources/Themes/Layout/TopBar.xaml"/>
+                <ResourceDictionary Source="Resources/Themes/Layout/SideBar.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
